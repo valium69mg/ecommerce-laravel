@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     //
-    public function redirect() {
+    public function redirect() {    
+        return view('welcome');
+    }
+
+    public function dashboard() {
         if (Auth::user()) {
             $userType = Auth::user()->usertype;
             if ($userType === 1) { // ADMIN
@@ -19,6 +23,9 @@ class HomeController extends Controller
         } else {
             return view('welcome');
         }
-        
+    }
+
+    public function index() {
+        return view('user-page');
     }
 }
