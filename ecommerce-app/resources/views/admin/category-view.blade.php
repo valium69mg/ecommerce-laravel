@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <!-- HEAD -->
+  <style>
+    .divCenter {
+      text-align:center;
+      padding: 12px 24px;
+      background-color:#191c24;
+    }
+
+    .h2font {
+      font-size: 40px;
+      padding: 12px 24px;
+    }
+
+  </style>
 <head>
 @include('admin.head')
  </head>
@@ -14,8 +27,26 @@
         @include('admin.navbar')
         <!-- partial -->
         <!-- main-panel-->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+              {{session()->get('message')}}
+            </div>
+            @endif
+            <div class="divCenter">
+            <h2 class="h2font"> Add category </h2>
+            <form action="{{url('/addCategory')}}" method="POST">
+              @csrf
+              <input type="text" name="category_name" placeholder="Write category name"/>
+              <input type="submit" class="btn btn-primary" name="submit" value="Add to Category"/>
+            </form>
+            </div>  
+          </div>
+        </div>
         <!-- main-panel ends -->
       </div>
+      
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
