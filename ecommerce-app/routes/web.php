@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,6 +10,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [HomeController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/category', [AdminController::class,'viewCategory'])->middleware(['auth', 'verified'])->name('viewCategory');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
