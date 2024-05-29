@@ -69,7 +69,7 @@
               @foreach($data as $category)
               <tr> 
                 <td>{{$category->category_name}}</td>
-                <td><a class="btn btn-danger"href="#"> Delete </a></td>
+                <td><a onclick="return confirm('Are you sure to delete category?')" class="btn btn-danger"href="{{url('deleteCategory',$category->id)}}"> Delete </a></td>
               </tr>
               @endforeach
             </table>
