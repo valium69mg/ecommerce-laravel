@@ -37,4 +37,17 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Category deleted succesfully');
     }
 
+    public function viewAddProducts(){
+        if (Auth::user()) {
+            $userType = Auth::user()->usertype;
+            if ($userType === 1) { // ADMIN
+                return view('admin.add-product');
+            } else if ($userType === 0) { // NOT ADMIN
+                return view('home');
+            }
+        } else {
+            return view('login');
+        }
+    }
+
 }
