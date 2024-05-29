@@ -13,7 +13,8 @@ class AdminController extends Controller
         if (Auth::user()) {
             $userType = Auth::user()->usertype;
             if ($userType === 1) { // ADMIN
-                return view('admin.category-view');
+                $data = Category::all();
+                return view('admin.category-view',compact('data'));
             } else if ($userType === 0) { // NOT ADMIN
                 return view('home');
             }

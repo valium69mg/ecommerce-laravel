@@ -13,6 +13,25 @@
       padding: 12px 24px;
     }
 
+    .center {
+      margin: auto;
+      margin-top: 24px;
+      width: 50%;
+      text-align: center;
+      padding: 12px 24px;
+      border: 3px solid white;
+      background-color: black;
+    }
+
+    .center tr {
+      border-bottom: 1px solid white;
+    }
+
+    .categoryTitle{
+      background-color: white;
+      color: black;
+    }
+
   </style>
 <head>
 @include('admin.head')
@@ -30,9 +49,9 @@
         <div class="main-panel">
           <div class="content-wrapper">
             @if(session()->has('message'))
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> x</button>
             <div class="alert alert-success">
               {{session()->get('message')}}
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> x </button>
             </div>
             @endif
             <div class="divCenter">
@@ -42,6 +61,18 @@
               <input type="text" name="category_name" placeholder="Write category name"/>
               <input type="submit" class="btn btn-primary" name="submit" value="Add to Category"/>
             </form>
+            <table class="center">
+              <tr class="categoryTitle"> 
+                <td> Category Name </td>
+                <td> Action </td>
+              </tr>
+              @foreach($data as $category)
+              <tr> 
+                <td>{{$category->category_name}}</td>
+                <td><a class="btn btn-danger"href="#"> Delete </a></td>
+              </tr>
+              @endforeach
+            </table>
             </div>  
           </div>
         </div>
