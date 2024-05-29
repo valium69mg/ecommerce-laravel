@@ -71,7 +71,7 @@
             <div class="divCenter">
                 <h2 class="h2font"> Add Product </h2>
                 
-                <form action="" method="" >
+                <form action="{{url('/addProduct')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="addProductForm">
                         <div>
