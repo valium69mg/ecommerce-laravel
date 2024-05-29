@@ -13,6 +13,39 @@
       padding: 12px 24px;
     }
 
+    .addProductForm {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        justify-content: center; /* y */
+        align-items: center; /* x */
+        width: 100%;
+    }
+
+    .addProductForm > input {
+        width: 200px;
+    }
+
+    .addProductForm > div {
+        width: 50%;
+        padding: 12px 24px;
+    }
+
+    .addProductForm > div > input {
+        width: 50%;
+    }
+
+    .addProductForm > div > label {
+        width: 20%;
+    }
+
+
+
+    .category {
+        width: 100%;
+
+    }
+
   </style>
 <head>
 @include('admin.head')
@@ -29,8 +62,53 @@
         <!-- main-panel-->
         <div class="main-panel">
           <div class="content-wrapper">
+          @if(session()->has('message'))
+            <div class="alert alert-success">
+              {{session()->get('message')}}
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> x </button>
+            </div>
+            @endif
             <div class="divCenter">
                 <h2 class="h2font"> Add Product </h2>
+                
+                <form action="" method="" >
+                    @csrf
+                    <div class="addProductForm">
+                        <div>
+                        <label for="title"> Title</label>
+                        <input type="text" name="title" id="title" placeholder="Write a title" required/>
+                        </div>
+                        <div>
+                        <label for="description"> Description </label>
+                        <input type="text" name="description" id="description" placeholder="Write a description" required/>
+                        </div>
+                        <div>
+                        <label for="price"> Price </label>
+                        <input type="text" name="price" id="price" placeholder="Write a price" required/>
+                        </div>
+                        <div>
+                        <label for="quantity"> Quantity </label>
+                        <input type="text" name="quantity" id="quantity" placeholder="Write a quantity" required/>
+                        </div>
+                        <div>
+                        <label for="discount_price"> Discount Price </label>
+                        <input type="text" name="discount_price" id="discount_price" placeholder="Write a discount" required/>
+                        </div>
+                        <div>
+                            <label for="image"> Upload product image: </label>
+                            <input type="file" name="image" id="image" required/>
+                        </div>
+                        <div class="category">
+                        <label for="category"> Category </label>
+                        <select class="text_color" name="category" >
+                            @foreach ($data as $category)
+                                <option> {{$category->category_name}} </option>
+                            @endforeach    
+                        </select>    
+                        </div>
+                        <input type="submit" class="btn btn-primary" name="submit" value="Add to Products"/>
+                    </div>
+                </form>
             </div>
           </div>
         </div>
