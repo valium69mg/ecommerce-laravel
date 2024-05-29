@@ -15,6 +15,10 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->category = $request->category;
         $product->discount_price = $request->discount_price;
+        $image = $request->image;
+        $imageName = time().'.'. $image->getClientOriginalExtension();
+        $request->image->move('product', $imageName);
+        $product->img_name = $imageName;
         $product->save();
         return redirect()->back()->with("message","Product created succesfully");
     }
