@@ -13,24 +13,30 @@
       padding: 12px 24px;
     }
 
-    .center {
-      margin: auto;
-      margin-top: 24px;
-      width: 50%;
-      text-align: center;
-      padding: 12px 24px;
-      border: 3px solid white;
-      background-color: black;
+    .showCategoriesTable {
+        margin: auto;
+        margin-top: 24px;
+        width: 50%;
+        text-align: center;
+        padding: 12px 24px;
+        border: 1px solid white;
     }
 
-    .center tr {
-      border-bottom: 1px solid white;
+    .showCategoriesTable tr{
+        border-bottom: 1px solid white;
     }
 
-    .categoryTitle{
-      background-color: white;
-      color: black;
+    .showCategoriesTable tr > td{
+        padding: 12px 24px;
     }
+
+
+    .tableHeaders{
+        background-color: white;
+        color:black;
+    }
+
+    
 
   </style>
 <head>
@@ -61,8 +67,8 @@
               <input type="text" name="category_name" placeholder="Write category name"/>
               <input type="submit" class="btn btn-primary" name="submit" value="Add to Category"/>
             </form>
-            <table class="center">
-              <tr class="categoryTitle"> 
+            <table class="showCategoriesTable">
+              <tr class="tableHeaders"> 
                 <td> Category Name </td>
                 <td> Action </td>
               </tr>
