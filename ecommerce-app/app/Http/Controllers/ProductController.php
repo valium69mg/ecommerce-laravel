@@ -76,4 +76,10 @@ class ProductController extends Controller
         return redirect()->back()->with("message","Product edited succesfully");
     }
 
+    public function deleteProduct($id) {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->back()->with("message","Product deleted succesfully");
+    }
+
 }

@@ -22,13 +22,14 @@
         display: flex;
         flex-direction: column;
         justify-content:center;
-        border: 1px solid white;
         align-items:center;
-        width: fit-content;
+        width: 100%;
     }
 
     .showProductsTable tr{
         border-bottom: 1px solid white;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
         width: 100%;
     }
 
@@ -102,7 +103,7 @@
                         <th>{{$product->discount_price}}</th>
                         <th><img class="productImg" src="/product/{{$product->img_name}}"/></th>
                         <th><a class="btn" href="/editProduct/{{$product->id}}"> Edit </a> </th>
-                        <th><a class="btn" href="#"> Delete </a> </th>
+                        <th><a onclick="return confirm('Are you sure to delete this item?')" class="btn" href="{{'/deleteProduct/'.$product->id}}"> Delete </a> </th>
                     </tr>
                     @endforeach
                 </table>
