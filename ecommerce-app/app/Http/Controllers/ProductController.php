@@ -27,7 +27,8 @@ class ProductController extends Controller
         if (Auth::user()) {
             $userType = Auth::user()->usertype;
             if ($userType === 1) { // ADMIN
-                return view('admin.product-view');
+                $data = Product::all();
+                return view('admin.product-view',compact('data'));
             } else if ($userType === 0) { // NOT ADMIN
                 return view('dashboard');
             }

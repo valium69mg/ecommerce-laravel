@@ -3,14 +3,43 @@
   <!-- HEAD -->
   <style>
     .divCenter {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       text-align:center;
       padding: 12px 24px;
       background-color:#191c24;
+      justify-content:center;
+      align-items:center;
     }
 
     .h2font {
       font-size: 40px;
       padding: 12px 24px;
+    }
+
+    .showProductsTable {
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        border: 1px solid white;
+        align-items:center;
+        width: fit-content;
+    }
+
+    .showProductsTable tr{
+        border-bottom: 1px solid white;
+        width: 100%;
+    }
+
+    .showProductsTable tr > th{
+        padding: 12px 24px;
+    }
+
+    .tableHeaders{
+        background-color: white;
+        color:black;
+        width: 100%;
     }
 
   </style>
@@ -38,7 +67,32 @@
             <div class="divCenter">
                 <h2 class="h2font"> Show Products </h2>
                 
-                
+                <table class="showProductsTable">
+                    <tr class="tableHeaders">
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th> Quantity</th>
+                        <th> Category </th>
+                        <th> Discount Price</th>
+                        <th> Image </th>
+                        <th> Action </th>
+                        <th> Action </th>
+                    </tr>    
+                    @foreach ($data as $product)
+                    <tr>
+                        <th>{{$product->title}}</th>
+                        <th>{{$product->description}}</th>
+                        <th>{{$product->price}}</th>
+                        <th>{{$product->quantity}}</th>
+                        <th>{{$product->category}}</th>
+                        <th>{{$product->discount_price}}</th>
+                        <th>{{$product->img_name}}</th>
+                        <th><a class="btn" href="#"> Edit </a> </th>
+                        <th><a class="btn" href="#"> Delete </a> </th>
+                    </tr>
+                    @endforeach
+                </table>
             </div>
           </div>
         </div>
