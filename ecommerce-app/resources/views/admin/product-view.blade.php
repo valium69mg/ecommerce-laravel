@@ -56,11 +56,21 @@
       color: white;
     }
 
+    .alertBtn:hover {
+      text-decoration:none;
+      color: white;
+    }
+
     .blueBtn{
       background-color: blue;
       padding: 12px 24px;
       text-align: center;
       border-radius: 6px;
+      color: white;
+    }
+
+    .blueBtn:hover {
+      text-decoration:none;
       color: white;
     }
 
