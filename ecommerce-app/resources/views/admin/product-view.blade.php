@@ -42,6 +42,11 @@
         width: 100%;
     }
 
+    .productImg {
+        width: 100px;
+        height: auto;
+    }
+
   </style>
 <head>
 @include('admin.head')
@@ -81,13 +86,21 @@
                     </tr>    
                     @foreach ($data as $product)
                     <tr>
-                        <th>{{$product->title}}</th>
-                        <th>{{$product->description}}</th>
+                        @if (strlen($product->title) > 49)
+                            <th>{{substr($product->title,0,50).'...'}}</th>
+                        @else
+                            <th>{{$product->title}}</th>
+                        @endif
+                        @if (strlen($product->description) > 49)
+                            <th>{{substr($product->description,0,50).'...'}}</th>
+                        @else
+                            <th>{{$product->description}}</th>
+                        @endif
                         <th>{{$product->price}}</th>
                         <th>{{$product->quantity}}</th>
                         <th>{{$product->category}}</th>
                         <th>{{$product->discount_price}}</th>
-                        <th>{{$product->img_name}}</th>
+                        <th><img class="productImg" src="/product/{{$product->img_name}}"/></th>
                         <th><a class="btn" href="#"> Edit </a> </th>
                         <th><a class="btn" href="#"> Delete </a> </th>
                     </tr>
