@@ -48,6 +48,22 @@
         height: auto;
     }
 
+    .alertBtn {
+      background-color: red;
+      padding: 12px 24px;
+      text-align: center;
+      border-radius: 6px;
+      color: white;
+    }
+
+    .blueBtn{
+      background-color: blue;
+      padding: 12px 24px;
+      text-align: center;
+      border-radius: 6px;
+      color: white;
+    }
+
   </style>
 <head>
 @include('admin.head')
@@ -102,8 +118,8 @@
                         <th>{{$product->category}}</th>
                         <th>{{$product->discount_price}}</th>
                         <th><img class="productImg" src="/product/{{$product->img_name}}"/></th>
-                        <th><a class="btn" href="/editProduct/{{$product->id}}"> Edit </a> </th>
-                        <th><a onclick="return confirm('Are you sure to delete this item?')" class="btn" href="{{'/deleteProduct/'.$product->id}}"> Delete </a> </th>
+                        <th><a class="blueBtn" href="/editProduct/{{$product->id}}"> Edit </a> </th>
+                        <th><a onclick="return confirm('Are you sure to delete this item?')" class="alertBtn" href="{{'/deleteProduct/'.$product->id}}"> Delete </a> </th>
                     </tr>
                     @endforeach
                 </table>
