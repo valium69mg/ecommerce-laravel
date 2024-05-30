@@ -26,6 +26,10 @@ Route::post('/addProduct',[ProductController::class,'addProduct'])->middleware([
 
 Route::get('/showProducts',[ProductController::class,'showProducts'])->middleware(['auth','verified']);
 
+Route::get('editProduct/{id}',[ProductController::class,'editProduct'])->middleware(['auth','verified']);
+
+Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct'])->middleware(['auth','verified']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

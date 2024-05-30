@@ -101,7 +101,7 @@
                         <th>{{$product->category}}</th>
                         <th>{{$product->discount_price}}</th>
                         <th><img class="productImg" src="/product/{{$product->img_name}}"/></th>
-                        <th><a class="btn" href="#"> Edit </a> </th>
+                        <th><a class="btn" href="/editProduct/{{$product->id}}"> Edit </a> </th>
                         <th><a class="btn" href="#"> Delete </a> </th>
                     </tr>
                     @endforeach
