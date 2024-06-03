@@ -25,28 +25,36 @@
                         </div>
                         <div class="detail-box">
                            <h5>
-                              @if (strlen($product->title) > 15)
-                              {{substr($product->title,0,16).'...'}}
+                              @if (strlen($product->title) > 13)
+                              {{substr($product->title,0,13).'...'}}
                               @else
                               {{$product->title}}
                               @endif
                            </h5>
                            <h6>
+                              
                               @if ($product->discount_price == 0)
+                              {{'$'.$product->price}}
                               @else
-                              <span class="discountSpan">
-                              {{'-'.($product->discount_price)}}
-                              </span>
+                              {{('$'.$product->price - $product->discount_price)}}
                               @endif
                               
                            </h6>
-                           <h6>
-                              {{'$'.$product->price}}
-                           </h6>
                         </div>
+                        @if ($product->discount_price == 0)
+                           <h6 class="discountSpan">
+                              0%
+                           </h6>
+                           @else
+                           <h6 class="discountPercent">
+                           {{'-'.substr(($product->discount_price/$product->price)*100,0,3).'%'}}
+                           </h6>
+                        @endif
+                        
                      </div>
                      </div>
                @endforeach
+               {!!$data->withQueryString()->links('pagination::bootstrap-5')!!}
                @endif
             </div>
             <div class="btn-box">

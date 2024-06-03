@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $data = \App\Models\Product::all();
+    $data = \App\Models\Product::paginate(3);
     return view('user-page',compact('data'));
 });
 

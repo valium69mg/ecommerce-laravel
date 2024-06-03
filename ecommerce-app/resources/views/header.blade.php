@@ -14,6 +14,10 @@
         <link href="template/css/responsive.css" rel="stylesheet" />
         <style>
                 .discountSpan{
+                        color:transparent;
+                }
+
+                .discountPercent {
                         color:red;
                 }
         </style>
