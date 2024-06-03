@@ -33,6 +33,8 @@ Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct'])->m
 
 Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct'])->middleware(['auth','verified']);
 
+Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

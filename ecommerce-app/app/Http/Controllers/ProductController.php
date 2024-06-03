@@ -82,4 +82,10 @@ class ProductController extends Controller
         return redirect()->back()->with("message","Product deleted succesfully");
     }
 
+    public function getDetails($id) {
+        $product = Product::find($id);
+        return view("products.product-details", compact("product"));
+        
+    }
+
 }
