@@ -7,7 +7,8 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('user-page');
+    $data = \App\Models\Product::all();
+    return view('user-page',compact('data'));
 });
 
 Route::get('/dashboard', [HomeController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
