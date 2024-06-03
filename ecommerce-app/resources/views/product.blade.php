@@ -32,6 +32,15 @@
                               @endif
                            </h5>
                            <h6>
+                              @if ($product->discount_price == 0)
+                              @else
+                              <span class="discountSpan">
+                              {{'-'.($product->discount_price)}}
+                              </span>
+                              @endif
+                              
+                           </h6>
+                           <h6>
                               {{'$'.$product->price}}
                            </h6>
                         </div>

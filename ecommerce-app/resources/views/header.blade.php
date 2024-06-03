@@ -12,5 +12,9 @@
         <link href="template/css/style.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="template/css/responsive.css" rel="stylesheet" />
-
+        <style>
+                .discountSpan{
+                        color:red;
+                }
+        </style>
 </head>
