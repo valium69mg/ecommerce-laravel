@@ -115,7 +115,6 @@
                 </div>
                 <div class="buttonContainer">
                 <button class="btn btn-gray"> Add to Cart </button>
-                <button class="btn btn-green"> Buy </button>
                 </div>
                 </div>
         </div>
