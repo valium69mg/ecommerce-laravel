@@ -32,9 +32,6 @@
                     padding: 12px 24px;
                 }
 
-                .cartItem h2 {
-                    width:45%;
-                }
 
                 .cartItem img {
                     height: auto;
@@ -66,6 +63,17 @@
                     border-radius: 6px;
                     background-color: #f8f9fa;
                 }
+
+                .productLink {
+                    text-decoration:none;
+                    color:black;
+                    width:40%;
+                }
+
+                .productLink:hover {
+                    text-decoration:none;
+                    color:black;
+                }
         </style>
 </head>
       <div class="hero_area">
@@ -78,9 +86,12 @@
             <div class="cartItem">
                 <img src="product/{{$product->img_name}}"/>
                 @if (strlen($product->title) > 15)
-                <h2> {{substr($product->title,0,16).'....'}} #{{$product->product_id}}</h2>
+                <a class="productLink" href="/productDetails/{{$product->product_id}}"><h2> {{substr($product->title,0,16).'....'}} #{{$product->product_id}}</h2>
+                </a>
                 @else
+                <a class="productLink" href="/productDetails/{{$product->product_id}}">
                 <h2> {{$product->title}} #{{$product->product_id}}</h2>
+                </a>
                 @endif
                 <label> Quantity: {{$product->quantity}}</label>
                 <h5> Total Price: ${{$product->price - $product->discount_price}}</h5>
