@@ -12,7 +12,7 @@
                         </li>
                        
                         <li class="nav-item">
-                           <a class="nav-link" href="product.html">Products</a>
+                           <a class="nav-link" href="/orderProducts">Products</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>

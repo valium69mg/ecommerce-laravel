@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -43,6 +44,9 @@ Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['
 Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->middleware(['auth','verified'])->name('addToCart');
 Route::post('/editQuantity',[ShoppingCartController::class,'editQuantity'])->middleware(['auth','verified'])->name('editQuantity');
 Route::post('/deleteProductCart',[ShoppingCartController::class,'deleteProductCart'])->middleware(['auth','verified'])->name('deleteProductCart');
+
+// ORDER PRODUCTS
+Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('orderProducts');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
