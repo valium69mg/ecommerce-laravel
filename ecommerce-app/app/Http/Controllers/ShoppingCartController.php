@@ -38,13 +38,36 @@ class ShoppingCartController extends Controller
             // MAKE A INNER JOIN BETWEEN PRODUCTS AND CART PRODUCTS
             $cart = DB::table('products')
             ->join('cart_products','products.id','=','cart_products.product_id')
-            ->select('cart_products.product_id','products.title','products.price','products.discount_price','products.img_name','cart_products.quantity')
+            ->select('cart_products.product_id','products.title','products.price','products.discount_price','products.img_name','cart_products.quantity','cart_products.id')
             ->get();
             return view("shopping-cart",compact("cart"));
         } else {
             return view("login");
         }
     }
+    public function editQuantity(Request $request) {
+        if (Auth::user()){
+            $cartProduct = CartProducts::find($request->product_id);
+            if ($request->quantity >= 1) {
+                $cartProduct->quantity = $request->quantity;
+                $cartProduct->save();
+            }
+            return redirect("/cart");
+        } else {
+            return view("login");
+        }
+    }
+
+    public function deleteProductCart(Request $request) {
+        if (Auth::user()) {
+            $cartProduct = CartProducts::find($request->product_id);
+            $cartProduct->delete();
+            return redirect('/cart');
+        } else {
+            return view("login");
+        }
+    }
+
     public function index()
     {
         //

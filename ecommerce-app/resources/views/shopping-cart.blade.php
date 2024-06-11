@@ -33,7 +33,7 @@
                 }
 
                 .cartItem h2 {
-                    width:50%;
+                    width:45%;
                 }
 
                 .cartItem img {
@@ -47,6 +47,25 @@
                 .cartItem span {
                     color:red;
                 }
+
+                #quantity {
+                    width: 78px;
+                }
+
+                .editForm {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content:center;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 12px 24px;
+                }
+
+                .button {
+                    padding: 12px 24px;
+                    border-radius: 6px;
+                    background-color: #f8f9fa;
+                }
         </style>
 </head>
       <div class="hero_area">
@@ -57,14 +76,27 @@
             @if (isset($cart))
             @foreach ($cart as $product)
             <div class="cartItem">
-                <h2> {{$product->title}} {{$product->product_id}}</h2>
-                <label for="quantity"> Quantity: </label>
-                <input type="number" value="{{$product->quantity}}"/>
                 <img src="product/{{$product->img_name}}"/>
+                @if (strlen($product->title) > 15)
+                <h2> {{substr($product->title,0,16).'....'}} #{{$product->product_id}}</h2>
+                @else
+                <h2> {{$product->title}} #{{$product->product_id}}</h2>
+                @endif
+                <label> Quantity: {{$product->quantity}}</label>
                 <h5> Total Price: ${{$product->price - $product->discount_price}}</h5>
-                <a type="submit"> Edit Quantity </a>
-                
-                <a type="submit"> <span>Delete</span> </a>
+                <form action="{{url('/editQuantity')}}" method="post">
+                    @csrf
+                    <input name="product_id" type="hidden" value="{{$product->id}}"/>
+                    <div class="editForm">
+                    <input id="quantity" name="quantity" type="number" value="{{$product->quantity}}"/>
+                    <button class="button" type="submit"> Edit Quantity </button>
+                    </div>
+                </form>
+                <form action="{{url('/deleteProductCart')}}" method="post">
+                    @csrf
+                    <input name="product_id" type="hidden" value="{{$product->id}}"/>
+                    <button class="button" type="submit"> <span>Delete</span> </button>
+                </form>
             </div>
             @endforeach
             
