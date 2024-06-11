@@ -40,7 +40,13 @@ class ShoppingCartController extends Controller
             ->join('cart_products','products.id','=','cart_products.product_id')
             ->select('cart_products.product_id','products.title','products.price','products.discount_price','products.img_name','cart_products.quantity','cart_products.id')
             ->get();
-            return view("shopping-cart",compact("cart"));
+            $total = 0;
+            for ($i = 0; $i < count($cart); $i++) {
+                $product = $cart[$i];
+                $productTotal = ($product->price - $product->discount_price) * $product->quantity; // product price * product_cart quantity
+                $total += $productTotal;
+            }
+            return view("shopping-cart",compact("cart","total"));
         } else {
             return view("login");
         }

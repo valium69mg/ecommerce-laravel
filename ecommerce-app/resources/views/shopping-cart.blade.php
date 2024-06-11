@@ -32,6 +32,12 @@
                     padding: 12px 24px;
                 }
 
+                .total {
+                    padding: 24px 24px;
+                    justify-content: end;
+                    align-items: center;
+                }
+
 
                 .cartItem img {
                     height: auto;
@@ -41,7 +47,7 @@
                 .cartItem input {
                     width: 48px;
                 }
-                .cartItem span {
+                .cartItem .red {
                     color:red;
                 }
 
@@ -74,6 +80,10 @@
                     text-decoration:none;
                     color:black;
                 }
+
+                .green {
+                    color:green;
+                }
         </style>
 </head>
       <div class="hero_area">
@@ -100,17 +110,24 @@
                     <input name="product_id" type="hidden" value="{{$product->id}}"/>
                     <div class="editForm">
                     <input id="quantity" name="quantity" type="number" value="{{$product->quantity}}"/>
-                    <button class="button" type="submit"> Edit Quantity </button>
+                    <button class="button" type="submit" onclick="return confirm('Are you sure to edit this item`s quantity?')"> Edit Quantity </button>
                     </div>
                 </form>
                 <form action="{{url('/deleteProductCart')}}" method="post">
                     @csrf
                     <input name="product_id" type="hidden" value="{{$product->id}}"/>
-                    <button class="button" type="submit"> <span>Delete</span> </button>
+                    <button class="button" type="submit" onclick="return confirm('Are you sure to delete this item?')"> <span class="red">Delete</span> </button>
                 </form>
+                
             </div>
             @endforeach
-            
+            <div class="cartItem total">
+                    @if (isset($total))
+                    <h3> Total: <span class="green">${{$total}}</span></h3>
+                    @else
+                    <h3> Total: $0 </h3>
+                    @endif
+                </div>
             @endif
         </div>
       </div>
