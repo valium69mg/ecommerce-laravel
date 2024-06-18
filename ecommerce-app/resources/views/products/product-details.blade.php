@@ -73,6 +73,8 @@
                 .discountPercent {
                     color: gray;
                 }
+
+                
         </style>
 </head>
 
@@ -114,7 +116,14 @@
                 @endif
                 </div>
                 <div class="buttonContainer">
-                <button class="btn btn-gray"> Add to Cart </button>
+                <form action="{{url('/addToCart')}}" method="post">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                    <input type="hidden" name="quantity" value="1"/>
+                    <button type="submit" class="btn">
+                                    Add to Cart
+                    </button>
+                </form>
                 </div>
                 </div>
         </div>
