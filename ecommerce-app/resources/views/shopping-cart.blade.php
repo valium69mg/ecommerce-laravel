@@ -84,6 +84,38 @@
                 .green {
                     color:green;
                 }
+
+                .toOrder {
+                    margin-right: 15%;
+                    align-self:end;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:end;
+                    justify-content:center;
+                    row-gap: 12px;
+                }
+
+                .proceedCashBtn {
+                    color: white;
+                    background-color:green;
+                    width: 70%;
+                    text-align:center;
+                }
+
+                .proceedCardBtn {
+                    color: white;
+                    background-color:blue;
+                    width: 70%;
+                    text-align:center;
+                }
+
+                .proceedCashBtn:hover {
+                    color:white;
+                }
+                .proceedCardBtn:hover {
+                    color:white;
+                }
+
         </style>
 </head>
       <div class="hero_area">
@@ -127,7 +159,13 @@
                     @else
                     <h3> Total: $0 </h3>
                     @endif
-                </div>
+            </div>
+                
+            <div class="toOrder">
+                <h1> Proceed to Order: </h1>
+                <a class="button proceedCashBtn" href="#"> Cash On Delivery </a>
+                <a class="button proceedCardBtn" href="#"> Pay Using Card </a>
+            </div>
             @endif
         </div>
       </div>
