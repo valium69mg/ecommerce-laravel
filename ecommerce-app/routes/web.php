@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
@@ -47,6 +48,12 @@ Route::post('/deleteProductCart',[ShoppingCartController::class,'deleteProductCa
 
 // ORDER PRODUCTS
 Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('orderProducts');
+
+// MANAGE ORDERS AND PAYMENTS
+Route::get('/cashOrder',[OrderController::class,'cashOrder'])->middleware(['auth'],['verified'])->name('cashOrder');
+//Route::get('/cardOrder',[OrderController::class,'cardOrder'])->middleware(['auth'],['verified'])->name('cardOrder');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

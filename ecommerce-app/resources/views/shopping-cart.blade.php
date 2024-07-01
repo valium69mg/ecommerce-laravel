@@ -163,8 +163,8 @@
                 
             <div class="toOrder">
                 <h1> Proceed to Order: </h1>
-                <a class="button proceedCashBtn" href="#"> Cash On Delivery </a>
-                <a class="button proceedCardBtn" href="#"> Pay Using Card </a>
+                <a class="button proceedCashBtn" href="{{url('cashOrder')}}"> Cash On Delivery </a>
+                <a class="button proceedCardBtn" href="{{url('cardOrder')}}"> Pay Using Card </a>
             </div>
             @endif
         </div>
