@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 //use App\Http\Controllers\MyShopCartController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,7 @@ Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('ord
 Route::get('/cashOrder',[OrderController::class,'cashOrder'])->middleware(['auth'],['verified'])->name('cashOrder');
 Route::get('/cardOrder',[OrderController::class,'cardOrder'])->middleware(['auth'],['verified'])->name('cardOrder');
 
+Route::post('/stripePay',[StripePaymentController::class,'stripePost'])->middleware(['auth'],['verified'])->name('stripe.post');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
