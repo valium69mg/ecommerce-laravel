@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CartProducts;
 use App\Models\Product;
 use App\Models\Order;
+
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -55,7 +56,53 @@ class OrderController extends Controller
 
     public function cardOrder() {
         if (Auth::user()) {
-            return view("card-payment");
+            // FROM SHOPPING CART TO ORDER TABLE
+            $user = Auth::user();
+            // USER
+            $user_name = $user->name;
+            $user_email = $user->email;
+            $user_phone = $user->phone;
+            $user_address = $user->address;
+            $user_id = $user->id;
+            // CART
+            $myCartProducts = CartProducts::where("userid",'=',$user_id)->get();
+            if (count($myCartProducts) < 1) {
+                return redirect('/');
+            }
+            foreach ($myCartProducts as $product) {
+                $order = new Order();                
+                $productDetails = Product::where("id","=",$product->product_id)->get();
+                if (count($productDetails) != 1) {
+                    continue;
+                }
+                $order->name = $user_name;
+                $order->email = $user_email;
+                $order->phone = $user_phone;
+                $order->address = $user_address;
+                $order->userid = $user_id;
+                $order->product_title = $productDetails[0]->title;
+                $order->product_quantity = $product->quantity;
+                $order->product_price = $productDetails[0]->price;
+                $order->product_image = $productDetails[0]->img_name;
+                $order->payment_status = "pending";
+                $order->payment_method = "cash";
+                $order->delivery_status = "pending";
+                $order->save();
+                $product->delete();
+            }
+
+            // CARD PAYMENT
+            $total = 0;
+            $orderProducts = Order::where("userid","=",$user_id)->get();
+            foreach($orderProducts as $product) {
+                $productDiscount = Product::where("title","=",$product->product_title,
+                "and","img_name","=",$product->product_image)->get();
+                if ($productDiscount == null) {
+                    continue;
+                }
+                $total = ($product->product_price - $productDiscount[0]->discount_price) * $product->product_quantity;
+            }
+            return view("card-payment",compact("total"));
         }
         return redirect('login');
     }
