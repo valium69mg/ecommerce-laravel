@@ -52,4 +52,11 @@ class OrderController extends Controller
             return redirect('login');
         }
     }
+
+    public function cardOrder() {
+        if (Auth::user()) {
+            return view("card-payment");
+        }
+        return redirect('login');
+    }
 }
