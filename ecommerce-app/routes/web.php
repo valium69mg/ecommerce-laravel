@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $data = \App\Models\Product::paginate(3);
     return view('user-page',compact('data'));
-});
+})->name('home');
 
 Route::get('/dashboard', [HomeController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 

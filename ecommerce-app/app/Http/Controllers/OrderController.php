@@ -69,39 +69,13 @@ class OrderController extends Controller
             if (count($myCartProducts) < 1) {
                 return redirect('/');
             }
+            $total = 0;
             foreach ($myCartProducts as $product) {
-                $order = new Order();                
-                $productDetails = Product::where("id","=",$product->product_id)->get();
-                if (count($productDetails) != 1) {
-                    continue;
-                }
-                $order->name = $user_name;
-                $order->email = $user_email;
-                $order->phone = $user_phone;
-                $order->address = $user_address;
-                $order->userid = $user_id;
-                $order->product_title = $productDetails[0]->title;
-                $order->product_quantity = $product->quantity;
-                $order->product_price = $productDetails[0]->price;
-                $order->product_image = $productDetails[0]->img_name;
-                $order->payment_status = "pending";
-                $order->payment_method = "cash";
-                $order->delivery_status = "pending";
-                $order->save();
-                $product->delete();
+                $item = Product::where("id","=",$product->product_id)->get();
+                $item = $item[0];
+                $total += ($item->price - $item->discount_price) * $product->quantity;
             }
 
-            // CARD PAYMENT
-            $total = 0;
-            $orderProducts = Order::where("userid","=",$user_id)->get();
-            foreach($orderProducts as $product) {
-                $productDiscount = Product::where("title","=",$product->product_title,
-                "and","img_name","=",$product->product_image)->get();
-                if ($productDiscount == null) {
-                    continue;
-                }
-                $total = ($product->product_price - $productDiscount[0]->discount_price) * $product->product_quantity;
-            }
             return view("card-payment",compact("total"));
         }
         return redirect('login');
