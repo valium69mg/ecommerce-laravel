@@ -116,7 +116,9 @@
                 </div>
 
                 <div class="detailContainer">
-                <button type="submit"> Pay Now ($Total) </button>
+                @if(isset($total))
+                    <button type="submit"> Pay Now (${{$total}}) </button>
+                @endif    
                 </div>
 
             </form>
