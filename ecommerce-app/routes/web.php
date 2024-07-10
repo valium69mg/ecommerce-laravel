@@ -51,8 +51,7 @@ Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('ord
 
 // MANAGE ORDERS AND PAYMENTS
 Route::get('/cashOrder',[OrderController::class,'cashOrder'])->middleware(['auth'],['verified'])->name('cashOrder');
-//Route::get('/cardOrder',[OrderController::class,'cardOrder'])->middleware(['auth'],['verified'])->name('cardOrder');
-
+Route::get('/cardOrder',[OrderController::class,'cardOrder'])->middleware(['auth'],['verified'])->name('cardOrder');
 
 
 Route::middleware('auth')->group(function () {
