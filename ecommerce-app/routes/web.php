@@ -54,7 +54,11 @@ Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('ord
 Route::get('/cashOrder',[OrderController::class,'cashOrder'])->middleware(['auth'],['verified'])->name('cashOrder');
 Route::get('/cardOrder',[OrderController::class,'cardOrder'])->middleware(['auth'],['verified'])->name('cardOrder');
 
+// CARD PAYMENT
 Route::post('/stripePay',[StripePaymentController::class,'stripePost'])->middleware(['auth'],['verified'])->name('stripe.post');
+
+// DISPLAY USER ORDERS
+Route::get('/userOrders',[OrderProductsController::class,'userOrders'])->middleware(['auth'],['verified'])->name('userOrders');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

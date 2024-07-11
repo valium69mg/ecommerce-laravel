@@ -91,6 +91,9 @@ class StripePaymentController extends Controller
             $order->product_quantity = $product->quantity;
             $order->product_price = $productDetails[0]->price;
             $order->product_image = $productDetails[0]->img_name;
+            $order->product_id = $product->product_id;
+            $order->discount_price = $productDetails[0]->discount_price;
+            $order->total = ($productDetails[0]->price - $productDetails[0]->discount_price)*$product->quantity;
             $order->payment_status = "completed";
             $order->payment_method = "card";
             $order->delivery_status = "pending";

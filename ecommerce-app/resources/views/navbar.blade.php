@@ -17,6 +17,9 @@
                         <li class="nav-item">
                            <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>
                         </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{{ route('userOrders') }}"> User Orders </a>
+                        </li>
                         <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label"> Users <span class="caret"></span></a>
                            <ul class="dropdown-menu">
