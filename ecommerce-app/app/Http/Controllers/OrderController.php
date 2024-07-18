@@ -83,4 +83,14 @@ class OrderController extends Controller
         }
         return redirect('login');
     }
+
+    public function storeOrders() {
+        if (Auth::user()->usertype === 1) {
+            $orders = Order::get();
+            return view("admin.orders-view",compact("orders"));
+                  
+        } else {
+            return redirect('login');
+        }
+    }
 }
