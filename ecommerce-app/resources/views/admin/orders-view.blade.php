@@ -14,7 +14,7 @@
     }
 
     .h2font {
-      font-size: 40px;
+      font-size: 24px;
       padding: 12px 24px;
     }
 
@@ -34,7 +34,7 @@
     }
 
     .showProductsTable tr > th{
-        padding: 12px 24px;
+        padding: 6px 12px;
     }
 
     .tableHeaders{
@@ -50,7 +50,7 @@
 
     .alertBtn {
       background-color: red;
-      padding: 12px 24px;
+      padding: 6px 12px;
       text-align: center;
       border-radius: 6px;
       color: white;
@@ -63,7 +63,7 @@
 
     .blueBtn{
       background-color: blue;
-      padding: 12px 24px;
+      padding: 6px 12px;
       text-align: center;
       border-radius: 6px;
       color: white;
@@ -101,6 +101,8 @@
                 
                 <table class="showProductsTable">
                     <tr class="tableHeaders">
+                        <th> Name </th>
+                        <th> Phone</th>
                         <th>Product Title</th>
                         <th>Product Quantity</th>
                         <th> Address </th>
@@ -114,6 +116,8 @@
                     </tr>    
                     @foreach ($orders as $order)
                     <tr>
+                        <th> {{$order->name}}</th>
+                        <th> {{$order->phone}}</th>
                         @if (strlen($order->product_title) > 30)
                         <th><a href="/productDetails/{{$order->product_id}}">{{substr($order->product_title,0,31).'...'}}</a></th>   
                         @else
