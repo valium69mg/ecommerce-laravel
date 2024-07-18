@@ -74,6 +74,17 @@
       color: white;
     }
 
+    .green {
+        color:green;
+    }
+    .blue {
+        color:lightblue;
+    }
+
+    .orange {
+        color:orange;
+    }
+
   </style>
 <head>
 @include('admin.head')
@@ -126,9 +137,27 @@
                         <th> {{$order->product_quantity}}</th>
                         <th> {{$order->address}}</th>
                         <th>{{$order->email}}</th>
+                        @if ($order->payment_method === "card")
+                        <th class="blue">{{$order->payment_method}}</th>
+                        @elseif ($order->payment_method === "cash")
+                        <th class="green">{{$order->payment_method}}</th>
+                        @else
                         <th>{{$order->payment_method}}</th>
+                        @endif
+                        @if ($order->payment_status === "completed")
+                        <th class="green">{{$order->payment_status}}</th>
+                        @elseif ($order->payment_status === "pending")
+                        <th class="orange">{{$order->payment_status}}</th>
+                        @else
                         <th>{{$order->payment_status}}</th>
+                        @endif
+                        @if ($order->delivery_status === "completed")
+                        <th class="green">{{$order->delivery_status}}</th>
+                        @elseif ($order->delivery_status === "pending")
+                        <th class="orange">{{$order->delivery_status}}</th>
+                        @else
                         <th>{{$order->delivery_status}}</th>
+                        @endif
                         <th>${{$order->total}}</th>
                         <th><a class="blueBtn" href=""> Edit </a> </th>
                         <th><a onclick="return confirm('Are you sure to delete this order?')" class="alertBtn" href=""> Delete </a> </th>
