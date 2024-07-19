@@ -108,4 +108,10 @@ class OrderController extends Controller
         $order->save();
         return back()->with("message","order updated succesfully!");
     }
+
+    public function deleteOrder($id) {
+        $order = Order::find($id);
+        $order->delete();
+        return redirect("storeOrders")->with("message","order succesfully deleted!");
+    }
 }
