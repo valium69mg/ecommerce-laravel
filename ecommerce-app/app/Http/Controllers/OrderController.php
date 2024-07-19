@@ -93,4 +93,19 @@ class OrderController extends Controller
             return redirect('login');
         }
     }
+
+    public function updateOrder($id) {
+        $order = Order::find($id);
+        return view("admin.update-order",compact("order"));       
+    }
+
+    public function updateOrderStatus(Request $request, $id) {
+        $payment_status = $request->payment_status;
+        $delivery_status = $request->delivery_status;
+        $order = Order::find($id);
+        $order->payment_status = $payment_status;
+        $order->delivery_status = $delivery_status;
+        $order->save();
+        return back()->with("message","order updated succesfully!");
+    }
 }
