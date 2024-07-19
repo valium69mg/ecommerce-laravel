@@ -44,6 +44,10 @@ Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
 // ADMIN ORDERS
 Route::get('/storeOrders',[OrderController::class,'storeOrders'])->middleware(['auth','verified'])->name('storeOrders');
 
+Route::get('/updateOrder/{id}',[OrderController::class,'updateOrder'])->middleware(['auth','verified'])->name('updateOrder');
+
+Route::post('/updateOrderStatus/{id}',[OrderController::class,'updateOrderStatus'])->middleware(['auth','verified'])->name('updateOrderStatus');
+
 // CART 
 Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['auth','verified'])->name('getCartPage');
 Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->middleware(['auth','verified'])->name('addToCart');
