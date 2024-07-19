@@ -48,6 +48,8 @@ Route::get('/updateOrder/{id}',[OrderController::class,'updateOrder'])->middlewa
 
 Route::post('/updateOrderStatus/{id}',[OrderController::class,'updateOrderStatus'])->middleware(['auth','verified'])->name('updateOrderStatus');
 
+Route::get('/deleteOrder/{id}',[OrderController::class,'deleteOrder'])->middleware(['auth','verified'])->name('deleteOrder');
+
 // CART 
 Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['auth','verified'])->name('getCartPage');
 Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->middleware(['auth','verified'])->name('addToCart');
