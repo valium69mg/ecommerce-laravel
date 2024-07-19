@@ -159,7 +159,7 @@
                         <th>{{$order->delivery_status}}</th>
                         @endif
                         <th>${{$order->total}}</th>
-                        <th><a class="blueBtn" href=""> Edit </a> </th>
+                        <th><a class="blueBtn" href="/updateOrder/{{$order->id}}"> Update </a> </th>
                         <th><a onclick="return confirm('Are you sure to delete this order?')" class="alertBtn" href=""> Delete </a> </th>
                     </tr>
                     @endforeach
