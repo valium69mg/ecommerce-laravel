@@ -57,10 +57,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // CART 
-Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['auth','verified'])->name('getCartPage');
-Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->middleware(['auth','verified'])->name('addToCart');
-Route::post('/editQuantity',[ShoppingCartController::class,'editQuantity'])->middleware(['auth','verified'])->name('editQuantity');
-Route::post('/deleteProductCart',[ShoppingCartController::class,'deleteProductCart'])->middleware(['auth','verified'])->name('deleteProductCart');
+Route::middleware('auth')->group(function () {
+    Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['auth','verified'])->name('getCartPage');
+    Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->middleware(['auth','verified'])->name('addToCart');
+    Route::post('/editQuantity',[ShoppingCartController::class,'editQuantity'])->middleware(['auth','verified'])->name('editQuantity');
+    Route::post('/deleteProductCart',[ShoppingCartController::class,'deleteProductCart'])->middleware(['auth','verified'])->name('deleteProductCart');
+});
 
 // ORDER PRODUCTS
 Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('orderProducts');
