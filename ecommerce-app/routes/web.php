@@ -37,19 +37,16 @@ Route::middleware('auth')->group(function () {
 });
 
 // PRODUCTS
-Route::get('/products',[AdminController::class,'viewAddProducts'])->middleware(['auth', 'verified']);
+Route::middleware('auth')->group(function () {
+    Route::get('/products',[AdminController::class,'viewAddProducts'])->middleware(['auth', 'verified']);
+    Route::post('/addProduct',[ProductController::class,'addProduct'])->middleware(['auth', 'verified']);
+    Route::get('/showProducts',[ProductController::class,'showProducts'])->middleware(['auth','verified']);
+    Route::get('editProduct/{id}',[ProductController::class,'editProduct'])->middleware(['auth','verified']);
+    Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct'])->middleware(['auth','verified']);
+    Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct'])->middleware(['auth','verified']);
+    Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
+});
 
-Route::post('/addProduct',[ProductController::class,'addProduct'])->middleware(['auth', 'verified']);
-
-Route::get('/showProducts',[ProductController::class,'showProducts'])->middleware(['auth','verified']);
-
-Route::get('editProduct/{id}',[ProductController::class,'editProduct'])->middleware(['auth','verified']);
-
-Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct'])->middleware(['auth','verified']);
-
-Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct'])->middleware(['auth','verified']);
-
-Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
 
 // ADMIN ORDERS
 Route::get('/storeOrders',[OrderController::class,'storeOrders'])->middleware(['auth','verified'])->name('storeOrders');
