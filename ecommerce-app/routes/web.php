@@ -49,13 +49,12 @@ Route::middleware('auth')->group(function () {
 
 
 // ADMIN ORDERS
-Route::get('/storeOrders',[OrderController::class,'storeOrders'])->middleware(['auth','verified'])->name('storeOrders');
-
-Route::get('/updateOrder/{id}',[OrderController::class,'updateOrder'])->middleware(['auth','verified'])->name('updateOrder');
-
-Route::post('/updateOrderStatus/{id}',[OrderController::class,'updateOrderStatus'])->middleware(['auth','verified'])->name('updateOrderStatus');
-
-Route::get('/deleteOrder/{id}',[OrderController::class,'deleteOrder'])->middleware(['auth','verified'])->name('deleteOrder');
+Route::middleware('auth')->group(function () {
+    Route::get('/storeOrders',[OrderController::class,'storeOrders'])->middleware(['auth','verified'])->name('storeOrders');
+    Route::get('/updateOrder/{id}',[OrderController::class,'updateOrder'])->middleware(['auth','verified'])->name('updateOrder');
+    Route::post('/updateOrderStatus/{id}',[OrderController::class,'updateOrderStatus'])->middleware(['auth','verified'])->name('updateOrderStatus');
+    Route::get('/deleteOrder/{id}',[OrderController::class,'deleteOrder'])->middleware(['auth','verified'])->name('deleteOrder');   
+});
 
 // CART 
 Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['auth','verified'])->name('getCartPage');
