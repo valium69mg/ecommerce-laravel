@@ -17,7 +17,9 @@ Route::get('/', function () {
     return view('user-page',compact('data'));
 })->name('home');
 
-Route::get('/dashboard', [HomeController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth:sanctum','verified'])->get('/dashboard',function() {
+    return view("dashboard");
+})->name('dashboard');
 
 // CATEGORIES
 Route::get('/category', [AdminController::class,'viewCategory'])->middleware(['auth', 'verified'])->name('viewCategory');
@@ -74,5 +76,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// EMAIL VERIFICATION
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 require __DIR__.'/auth.php';
