@@ -11,14 +11,22 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     $data = \App\Models\Product::paginate(3);
     return view('user-page',compact('data'));
 })->name('home');
 
+
+
 Route::middleware(['auth:sanctum','verified'])->get('/dashboard',function() {
-    return view("dashboard");
+    if (Auth::user()->usertype === 1) {
+        return view("admin.home");
+    } else if (Auth::user()->usertype === 0) {
+        return redirect()->route('home');
+    } 
 })->name('dashboard');
 
 // CATEGORIES
