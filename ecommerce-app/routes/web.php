@@ -31,37 +31,37 @@ Route::middleware(['auth:sanctum','verified'])->get('/dashboard',function() {
 
 // CATEGORIES
 Route::middleware('auth')->group(function () {
-    Route::get('/category', [AdminController::class,'viewCategory'])->middleware(['auth', 'verified'])->name('viewCategory');
-    Route::post('/addCategory',[AdminController::class,'addCategory'])->middleware(['auth', 'verified'])->name('addCategory');
-    Route::get('/deleteCategory/{id}',[AdminController::class,'deleteCategory'])->middleware(['auth', 'verified']);
+    Route::get('/category', [AdminController::class,'viewCategory'])->name('viewCategory');
+    Route::post('/addCategory',[AdminController::class,'addCategory'])->name('addCategory');
+    Route::get('/deleteCategory/{id}',[AdminController::class,'deleteCategory']);
 });
 
 // PRODUCTS
 Route::middleware('auth')->group(function () {
-    Route::get('/products',[AdminController::class,'viewAddProducts'])->middleware(['auth', 'verified']);
-    Route::post('/addProduct',[ProductController::class,'addProduct'])->middleware(['auth', 'verified']);
-    Route::get('/showProducts',[ProductController::class,'showProducts'])->middleware(['auth','verified']);
-    Route::get('editProduct/{id}',[ProductController::class,'editProduct'])->middleware(['auth','verified']);
-    Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct'])->middleware(['auth','verified']);
-    Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct'])->middleware(['auth','verified']);
+    Route::get('/products',[AdminController::class,'viewAddProducts']);
+    Route::post('/addProduct',[ProductController::class,'addProduct']);
+    Route::get('/showProducts',[ProductController::class,'showProducts']);
+    Route::get('editProduct/{id}',[ProductController::class,'editProduct']);
+    Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct']);
+    Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct']);
     Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
 });
 
 
 // ADMIN ORDERS
 Route::middleware('auth')->group(function () {
-    Route::get('/storeOrders',[OrderController::class,'storeOrders'])->middleware(['auth','verified'])->name('storeOrders');
-    Route::get('/updateOrder/{id}',[OrderController::class,'updateOrder'])->middleware(['auth','verified'])->name('updateOrder');
-    Route::post('/updateOrderStatus/{id}',[OrderController::class,'updateOrderStatus'])->middleware(['auth','verified'])->name('updateOrderStatus');
-    Route::get('/deleteOrder/{id}',[OrderController::class,'deleteOrder'])->middleware(['auth','verified'])->name('deleteOrder');   
+    Route::get('/storeOrders',[OrderController::class,'storeOrders'])->name('storeOrders');
+    Route::get('/updateOrder/{id}',[OrderController::class,'updateOrder'])->name('updateOrder');
+    Route::post('/updateOrderStatus/{id}',[OrderController::class,'updateOrderStatus'])->name('updateOrderStatus');
+    Route::get('/deleteOrder/{id}',[OrderController::class,'deleteOrder'])->name('deleteOrder');   
 });
 
 // CART 
 Route::middleware('auth')->group(function () {
-    Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->middleware(['auth','verified'])->name('getCartPage');
-    Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->middleware(['auth','verified'])->name('addToCart');
-    Route::post('/editQuantity',[ShoppingCartController::class,'editQuantity'])->middleware(['auth','verified'])->name('editQuantity');
-    Route::post('/deleteProductCart',[ShoppingCartController::class,'deleteProductCart'])->middleware(['auth','verified'])->name('deleteProductCart');
+    Route::get('/cart',[ShoppingCartController::class,'getCartPage'])->name('getCartPage');
+    Route::post('/addToCart',[ShoppingCartController::class,'addToCart'])->name('addToCart');
+    Route::post('/editQuantity',[ShoppingCartController::class,'editQuantity'])->name('editQuantity');
+    Route::post('/deleteProductCart',[ShoppingCartController::class,'deleteProductCart'])->name('deleteProductCart');
 });
 
 // ORDER PRODUCTS
@@ -69,8 +69,8 @@ Route::get('/orderProducts',[OrderProductsController::class,'index'])->middlewar
 
 // MANAGE ORDERS AND PAYMENTS
 Route::middleware('auth')->group(function () {
-    Route::get('/cashOrder',[OrderController::class,'cashOrder'])->middleware(['auth'],['verified'])->name('cashOrder');
-    Route::get('/cardOrder',[OrderController::class,'cardOrder'])->middleware(['auth'],['verified'])->name('cardOrder');
+    Route::get('/cashOrder',[OrderController::class,'cashOrder'])->name('cashOrder');
+    Route::get('/cardOrder',[OrderController::class,'cardOrder'])->name('cardOrder');
 });
 
 // CARD PAYMENT
