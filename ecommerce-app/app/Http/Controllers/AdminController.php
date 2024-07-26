@@ -10,45 +10,46 @@ class AdminController extends Controller
 {
     //
     public function viewCategory() {
-        if (Auth::user()) {
-            $userType = Auth::user()->usertype;
-            if ($userType === 1) { // ADMIN
-                $data = Category::all();
-                return view('admin.category-view',compact('data'));
-            } else if ($userType === 0) { // NOT ADMIN
-                return view('home');
-            }
-        } else {
-            return view('login');
-        }
+        $userType = Auth::user()->usertype;
+        if ($userType === 1) { // ADMIN
+            $data = Category::all();
+            return view('admin.category-view',compact('data'));
+        } 
+        // NOT ADMIN
+        return redirect()->route('home');
     }
 
     public function addCategory(Request $request) {
-        
-        $data = new Category();
-        $data->category_name = $request->category_name;
-        $data->save();
-        return redirect()->back()->with('message','Category added succesfully');
+        $userType = Auth::user()->usertype;
+        if ($userType === 1) { // ADMIN
+            $data = new Category();
+            $data->category_name = $request->category_name;
+            $data->save();
+            return redirect()->back()->with('message','Category added succesfully');
+        } 
+        // NOT ADMIN
+        return redirect()->route('home');
     }
 
     public function deleteCategory($id) {
-        $data = Category::find($id);
-        $data->delete();
-        return redirect()->back()->with('message','Category deleted succesfully');
+        $userType = Auth::user()->usertype;
+        if ($userType === 1) { // ADMIN
+            $data = Category::find($id);
+            $data->delete();
+            return redirect()->back()->with('message','Category deleted succesfully');
+        } 
+        // NOT ADMIN
+        return redirect()->route('home');
     }
 
     public function viewAddProducts(){
-        if (Auth::user()) {
-            $userType = Auth::user()->usertype;
-            if ($userType === 1) { // ADMIN
-                $data = Category::all();
-                return view('admin.add-product',compact('data'));
-            } else if ($userType === 0) { // NOT ADMIN
-                return view('home');
-            }
-        } else {
-            return view('login');
-        }
-    }
-
+        $userType = Auth::user()->usertype;
+        if ($userType === 1) { // ADMIN
+            $data = Category::all();
+            return view('admin.add-product',compact('data'));
+        } 
+        // NOT ADMIN
+        return redirect()->route('home');
+    } 
+    
 }
