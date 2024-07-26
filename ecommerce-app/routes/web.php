@@ -13,14 +13,14 @@ use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
+// MAIN PAGE OF THE STORE
 Route::get('/', function () {
     $data = \App\Models\Product::paginate(3);
     return view('user-page',compact('data'));
 })->name('home');
 
-
-
+// DASHBOARD ROUTE TO REDIRECT TO HOME OR TO ADMIN DASHBOARD DEPENDING ON USER AUTH LEVEL
+// ALSO HELPS THE EMAIL VERIFICATION SYSTEM TO REDIRECT BECAUSE SOME METHODS USE Route(Home)
 Route::middleware(['auth:sanctum','verified'])->get('/dashboard',function() {
     if (Auth::user()->usertype === 1) {
         return view("admin.home");
@@ -30,11 +30,11 @@ Route::middleware(['auth:sanctum','verified'])->get('/dashboard',function() {
 })->name('dashboard');
 
 // CATEGORIES
-Route::get('/category', [AdminController::class,'viewCategory'])->middleware(['auth', 'verified'])->name('viewCategory');
-
-Route::post('/addCategory',[AdminController::class,'addCategory'])->middleware(['auth', 'verified'])->name('addCategory');
-
-Route::get('/deleteCategory/{id}',[AdminController::class,'deleteCategory'])->middleware(['auth', 'verified']);
+Route::middleware('auth')->group(function () {
+    Route::get('/category', [AdminController::class,'viewCategory'])->middleware(['auth', 'verified'])->name('viewCategory');
+    Route::post('/addCategory',[AdminController::class,'addCategory'])->middleware(['auth', 'verified'])->name('addCategory');
+    Route::get('/deleteCategory/{id}',[AdminController::class,'deleteCategory'])->middleware(['auth', 'verified']);
+});
 
 // PRODUCTS
 Route::get('/products',[AdminController::class,'viewAddProducts'])->middleware(['auth', 'verified']);
