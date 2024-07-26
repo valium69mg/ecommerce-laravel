@@ -16,9 +16,13 @@
                         <li class="nav-item">
                            <a class="nav-link" href="/orderProducts">Products</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>
-                        </li>
+                        @if (Auth::user())
+                           @if (Auth::user()->usertype === 1)
+                           <li class="nav-item">
+                              <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>
+                           </li>
+                           @endif 
+                        @endif
                         <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label"> Users <span class="caret"></span></a>
                            <ul class="dropdown-menu">

@@ -14,9 +14,13 @@
                         <li class="nav-item">
                            <a class="nav-link" href="/orderProducts">Products</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>
-                        </li>
+                        @if (Auth::user())
+                           @if (Auth::user()->usertype === 1)
+                           <li class="nav-item">
+                              <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>
+                           </li>
+                           @endif 
+                        @endif
                         <li class="nav-item">
                            <a class="nav-link" href="{{ route('userOrders') }}"> User Orders </a>
                         </li>
