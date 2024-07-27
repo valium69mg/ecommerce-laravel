@@ -46,8 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct']);
 });
 
+// AUTHENTICATION NOT NECCESSARY
 Route::get('/showProducts',[ProductController::class,'showProducts']);
-Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
+Route::get('/productDetails/{id}',[ProductController::class,'getDetails']);
 
 
 // ADMIN ORDERS
