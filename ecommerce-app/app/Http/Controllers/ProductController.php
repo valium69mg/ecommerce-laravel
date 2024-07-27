@@ -88,7 +88,7 @@ class ProductController extends Controller
     }
 
     public function getDetails($id) { 
-        if (Auth::user()->usertype === 1) {
+        if (Auth::user()) {
             $product = Product::find($id);
             return view("products.product-details", compact("product"));
         }
