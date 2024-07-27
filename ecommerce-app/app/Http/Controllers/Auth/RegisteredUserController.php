@@ -30,11 +30,13 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        $request->address = $request->street_name . " " . $request->street_number . ", " . $request->city . ", " . $request->state . ", " . $request->country . ", " . $request->zip_code;
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'phone'=> ['required', 'string'],
-            'address'=> ['required', 'string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
