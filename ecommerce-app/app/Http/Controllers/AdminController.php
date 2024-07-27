@@ -86,7 +86,7 @@ class AdminController extends Controller
             // SEND MAIL
             $order = Order::find($request->order_id);
             Notification::send($order,new SendEmailNotification($details));
-            return redirect()->route('storeOrders');
+            return redirect('storeOrders')->with("message","email sent succesfully! ");
         } 
         // NOT ADMIN
         return redirect()->route('home');
