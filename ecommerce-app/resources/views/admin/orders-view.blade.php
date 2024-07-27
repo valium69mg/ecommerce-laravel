@@ -124,6 +124,7 @@
                         <th> Total </th>
                         <th> Action </th>
                         <th> Action </th>
+                        <th> Action </th>
                     </tr>    
                     @foreach ($orders as $order)
                     <tr>
@@ -161,7 +162,15 @@
                         <th>${{$order->total}}</th>
                         <th><a class="blueBtn" href="/updateOrder/{{$order->id}}"> Update </a> </th>
                         <th><a onclick="return confirm('Are you sure to delete this order?')" class="alertBtn" href="/deleteOrder/{{$order->id}}"> Delete </a> </th>
-                    </tr>
+                        <th>
+                          <form method="post" action="{{route('getSendMail')}}">
+                            @csrf
+                            <input name="email" type="hidden" value="{{$order->email}}"/>
+                            <input name="id" type="hidden" value="{{$order->id}}"/>
+                            <button class="blueBtn" type="subtmit"> Send Email </button>
+                          </form>
+                        </th>
+                      </tr>
                     @endforeach
                 </table>
             </div>

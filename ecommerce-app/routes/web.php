@@ -90,4 +90,8 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
+//SEND MAIL ON ORDER
+Route::post('/getSendMail',[AdminController::class,'getSendMail'])->middleware(['auth','verified'])->name('getSendMail');
+Route::post('/sendMail',[AdminController::class,'sendMail'])->middleware(['auth','verified'])->name('sendMail');
+
 require __DIR__.'/auth.php';
