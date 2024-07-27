@@ -44,8 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('editProduct/{id}',[ProductController::class,'editProduct']);
     Route::post('/updateProduct/{id}',[ProductController::class,'updateProduct']);
     Route::get('/deleteProduct/{id}',[ProductController::class,'deleteProduct']);
-    Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
 });
+
+Route::get('/showProducts',[ProductController::class,'showProducts']);
+Route ::get('/productDetails/{id}',[ProductController::class,'getDetails']);
 
 
 // ADMIN ORDERS
@@ -65,7 +67,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // ORDER PRODUCTS
-Route::get('/orderProducts',[OrderProductsController::class,'index'])->middleware(['auth','verified'])->name('orderProducts');
+Route::get('/orderProducts',[OrderProductsController::class,'index'])->name('orderProducts');
 
 // MANAGE ORDERS AND PAYMENTS
 Route::middleware('auth')->group(function () {
